@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 404c7dce45dd1a8478dd4fafa845ecf8
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - logoIcon: {fileID: 2800000, guid: ab0854529741cb04a8445aab3f5d113b, type: 3}
+  - DockSkin: {fileID: 11400000, guid: 683201123b034e14e985baff0fde68cf, type: 2}
+  - WinSkin: {fileID: 11400000, guid: 087597dc2a6093d47a76bc9ec0c8759a, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
