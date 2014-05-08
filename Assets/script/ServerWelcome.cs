@@ -67,12 +67,6 @@ public class ServerWelcome : MonoBehaviour {
 		display(serverStoped);
 	}
 
-	void Update(){
-		if(Input.GetMouseButtonDown(0)){
-			networkView.RPC("ReceiveInfoFromServer", RPCMode.Others, "server mouse click");
-		}
-	}
-
 	void OnMasterServerEvent(MasterServerEvent masterServerEvent){
 		if(masterServerEvent==MasterServerEvent.RegistrationSucceeded){
 			display(serverStart);
@@ -92,10 +86,9 @@ public class ServerWelcome : MonoBehaviour {
 		if(Network.isServer){
 			if(cameraCount>0){
 				if(GUILayout.Button(startApplicationLabel)){
-					infoSentToClient = appStart;
-					SendInfoToClient();
-//					networkView.RPC("ReceiveInfoFromServer", RPCMode.Others, "start");
-//					Application.LoadLevel("Server_main");
+//					infoSentToClient = appStart;
+//					SendInfoToClient();
+					Application.LoadLevel("Server_main");
 				}
 			}
 			if(GUILayout.Button(stopServerLabel)){
@@ -145,7 +138,6 @@ public class ServerWelcome : MonoBehaviour {
 	[RPC]
 	
 	void SendInfoToClient() {
-		Debug.Log("test");
 		networkView.RPC("ReceiveInfoFromServer", RPCMode.Others, infoSentToClient);
 	}
 		

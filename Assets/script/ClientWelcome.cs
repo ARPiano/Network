@@ -86,11 +86,12 @@ public class ClientWelcome : MonoBehaviour {
 	[RPC]
 	
 	void ReceiveInfoFromServer(string someInfo) {
-		Debug.Log(someInfo);
-		display("receive from server:"+someInfo);
-//		if(someInfo!=null && someInfo==ServerWelcome.appStart){
-//			Application.LoadLevel("Client_main");
-//		}
+		if(someInfo!=null){
+			display(someInfo);
+		}
+		if(someInfo!=null && someInfo.Equals(ServerWelcome.appStart)){
+			Application.LoadLevel("Client_main");
+		}
 	}
 
 	void OnConnectedToServer() {

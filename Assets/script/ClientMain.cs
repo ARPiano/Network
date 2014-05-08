@@ -4,26 +4,31 @@ using System.Collections;
 public class ClientMain : MonoBehaviour {
 
 	private string infoSentToServer;
-
-	// Use this for initialization
-	void Start () {
+		
+	[RPC]
 	
+	void ReceiveInfoFromClient(string someInfo) {	
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		if(Input.touchCount>0 || Input.GetMouseButton(0)){
-			sendMsg("press C1");
-		}
-	}
+	[RPC]
+	
+	void SendInfoToClient() {
 
-	void sendMsg(string msg){
-		infoSentToServer = msg;
-		SendInfoToServer();
 	}
-
-	void SendInfoToServer(){
-		networkView.RPC("ReceiveInfoFromClient", RPCMode.Server, infoSentToServer);
+	
+	[RPC]
+	
+	public void SendInfoToServer(string info) {
+		Debug.Log("trying to send information:"+info);
+		networkView.RPC("ReceiveInfoFromClient", RPCMode.Server, info);
 	}
+	
+	[RPC]
+	
+	void SetPlayerInfo(NetworkPlayer player) { }
+	
+	[RPC]
+	
+	void ReceiveInfoFromServer(string someInfo) { }
 	
 }
