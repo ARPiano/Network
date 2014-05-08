@@ -19,14 +19,14 @@ public class Keys : MonoBehaviour,IVirtualButtonEventHandler  {
 
 	public void OnButtonPressed(VirtualButtonAbstractBehaviour vb)
 	{
-		//vb.audio.Play();
+		vb.audio.Play();
 		if(cm!=null){
 			cm.SendInfoToServer("press:"+vb.VirtualButtonName);
 		}
 	}
 	public void OnButtonReleased(VirtualButtonAbstractBehaviour vb)
 	{
-		//vb.audio.Stop();
+		vb.audio.Stop();
 		if(cm!=null){
 			cm.SendInfoToServer("release:"+vb.VirtualButtonName);
 		}
