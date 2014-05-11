@@ -40,7 +40,7 @@ public class Volume : MonoBehaviour {
 		}
 		previousAngles = soda.transform.eulerAngles;
 		volume = AudioListener.volume;
-		cm.SendInfoToServer("volume: "+volume); 
+		cm.SendInfoToServer("volume: "+volume+","+soda.transform.localEulerAngles.y); 
 	}
 
 	void OnVolumeLost(){

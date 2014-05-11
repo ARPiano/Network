@@ -64,9 +64,16 @@ public class ServerMain : MonoBehaviour {
 
 	void displayVolume(string someInfo){
 		int i = "volume:".Length;
-		string volume = someInfo.Substring(i);
+		string volumeAndAngle = someInfo.Substring(i);
+		String[] strs = volumeAndAngle.Split(",");
+		string volume = strs[0];
 		volume.Trim();
-		volumeNumber.GetComponent<TextMesh>().text = volume;
+		string angle = strs[1];
+		angle.Trim();
+		volumeNumber.GetComponent<TextMesh>().text  = volume;
+		Vector3 langle = volumeCylinder.transform.localEulerAngles;
+		langle.y = float.Parse(angle);
+		volumeCylinder.transform.localEulerAngles = langle; 
 	}
 
 	void pressKey(string someInfo){
