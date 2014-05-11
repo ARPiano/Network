@@ -33,8 +33,10 @@ public class WayFinding : MonoBehaviour {
 				RaycastHit hit;
 				if (Physics.Raycast(ray, out hit)){
 					keys.Add(hit.transform.name);
+//					Debug.Log(hit.transform.name);
 				}
 			}
+			Debug.Log("left count:"+keys.Count);
 
 			keys.Sort();
 			if(keys.Count>0){
@@ -51,9 +53,11 @@ public class WayFinding : MonoBehaviour {
 				RaycastHit hit;
 				if (Physics.Raycast(ray, out hit)){
 					keys.Add(hit.transform.name);
+					//Debug.Log(hit.transform.name);
 				}
 			}
-
+			Debug.Log("right count:"+keys.Count);
+			
 			keys.Sort();
 			if(keys.Count>0){
 				last=(string)keys[keys.Count-1];

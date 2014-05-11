@@ -1,0 +1,16 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/script/Volume.cs">
+    <Files>
+      <File FileName="Assets/script/Keys.cs" Line="35" Column="1" />
+      <File FileName="Assets/script/WayFinding.cs" Line="1" Column="1" />
+      <File FileName="Assets/script/Volume.cs" Line="21" Column="2" />
+      <File FileName="Assets/script/ServerMain.cs" Line="57" Column="45" />
+      <File FileName="../keys.cs" Line="41" Column="33" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

@@ -31,4 +31,5 @@ public class Keys : MonoBehaviour,IVirtualButtonEventHandler  {
 			cm.SendInfoToServer("release:"+vb.VirtualButtonName);
 		}
 	}
+	
 }

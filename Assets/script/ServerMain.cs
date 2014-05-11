@@ -9,10 +9,17 @@ public class ServerMain : MonoBehaviour {
 	private string clientMsg = "";
 	public Material blue;
 	public Material white;
+	public Material findVolume;
+	public Material lostVolume;
+
+	public GameObject volumeLabel;
+	public GameObject volumeNumber;
+	public GameObject volumeCylinder;
 	
 	// Use this for initialization
 	void Start () {
 		SendInfoToClient(ServerWelcome.appStart);
+		changeColor("change to black");
 	}
 
 	void Update(){
@@ -40,73 +47,98 @@ public class ServerMain : MonoBehaviour {
 		if(someInfo!=null){
 			//receive info
 			if(someInfo.StartsWith("press")){
-				//press a key
-				int i = "press:".Length;
-				string key = someInfo.Substring(i);
-				key.Trim();
-				GameObject keyObj = GameObject.Find(key);
-				if(keyObj!=null){
-					Vector3 pos = keyObj.transform.localPosition;
-					pos.z = 0.03f;
-					keyObj.transform.localPosition = pos;
-//					int n = keyObj.transform.childCount;
-//					for(int j=0;j<n;j++){
-//						GameObject child = keyObj.transform.GetChild(j).gameObject;
-//						if(child.renderer!=null){
-//							child.renderer.material = blue;
-//						}
-//					}
-				}
+				pressKey(someInfo);
 			}else if(someInfo.StartsWith("release:")){
-				//release a key
-				int i = "release:".Length;
-				string key = someInfo.Substring(i);
-				key.Trim();
-				GameObject keyObj = GameObject.Find(key);
-				if(keyObj!=null){
-					Vector3 pos = keyObj.transform.localPosition;
-					pos.z = 0.0f;
-					keyObj.transform.localPosition = pos;
-//					int n = keyObj.transform.childCount;
-//					for(int j=0;j<n;j++){
-//						GameObject child = keyObj.transform.GetChild(j).gameObject;
-//						if(child.renderer!=null){
-//							child.renderer.material = white;
-//						}
-//					}
-				}
+				releaseKey(someInfo);
 			}else if(someInfo.StartsWith("area:")){
-				//area
-//				Debug.Log(someInfo);
-				int  i = "area:".Length;
-				string area = someInfo.Substring(i);
-				string[] param = area.Split(',');
-				int first = int.Parse(param[0]);
-				int second = int.Parse(param[1]);
-				int max = Mathf.Max(first,second);
-				first = Mathf.Min(first,second);
-				second = max;
-				Debug.Log("first:"+first+",second:"+second);
+				changeArea(someInfo);
+			}else if(someInfo.StartsWith("find volume")){
+				changeColor("change to blue");
+			}else if(someInfo.StartsWith("lost volume")){
+				changeColor("change to black");
+			}else if(someInfo.StartsWith("volume:")){
+				displayVolume(someInfo);
+			}
+	}
+}
 
-				for(int k = 1;k<=14;k++){
-					GameObject activeObject = GameObject.Find(k+"");
-					if(activeObject!=null){
-					int n = activeObject.transform.childCount;
-					for(int j=0;j<n;j++){
-						GameObject child = activeObject.transform.GetChild(j).gameObject;
-						if(child.renderer!=null){
-							if(k>=first && k<=second){
-								child.renderer.material = blue;
-							}else{
-								child.renderer.material = white;
-							}
+	void displayVolume(string someInfo){
+		int i = "volume:".Length;
+		string volume = someInfo.Substring(i);
+		volume.Trim();
+		volumeNumber.GetComponent<TextMesh>().text = volume;
+	}
+
+	void pressKey(string someInfo){
+		//press a key
+		int i = "press:".Length;
+		string key = someInfo.Substring(i);
+		key.Trim();
+		GameObject keyObj = GameObject.Find(key);
+		if(keyObj!=null){
+			Vector3 pos = keyObj.transform.localPosition;
+			pos.z = 0.03f;
+			keyObj.transform.localPosition = pos;
+		}
+	}
+	
+	void releaseKey(string someInfo){
+		//release a key
+		int i = "release:".Length;
+		string key = someInfo.Substring(i);
+		key.Trim();
+		GameObject keyObj = GameObject.Find(key);
+		if(keyObj!=null){
+			Vector3 pos = keyObj.transform.localPosition;
+			pos.z = 0.0f;
+			keyObj.transform.localPosition = pos;
+		}
+	}
+	
+	void changeArea(string someInfo){
+		//area
+		int  i = "area:".Length;
+		string area = someInfo.Substring(i);
+		string[] param = area.Split(',');
+		int first = int.Parse(param[0]);
+		int second = int.Parse(param[1]);
+		int max = Mathf.Max(first,second);
+		first = Mathf.Min(first,second);
+		second = max;
+		Debug.Log("first:"+first+",second:"+second);
+		
+		for(int k = 1;k<=14;k++){
+			GameObject activeObject = GameObject.Find(k+"");
+			if(activeObject!=null){
+				int n = activeObject.transform.childCount;
+				for(int j=0;j<n;j++){
+					GameObject child = activeObject.transform.GetChild(j).gameObject;
+					if(child.renderer!=null){
+						if(k>=first && k<=second){
+							child.renderer.material = blue;
+						}else{
+							child.renderer.material = white;
 						}
 					}
 				}
 			}
 		}
 	}
-}
+	
+	void changeColor(string command){
+		switch(command){
+		case "change to blue":
+			volumeLabel.GetComponent<TextMesh>().color = findVolume.color;
+			volumeNumber.GetComponent<TextMesh>().color = findVolume.color;
+			volumeCylinder.GetComponent<Renderer>().material = findVolume;
+			break;
+		case "change to black":
+			volumeLabel.GetComponent<TextMesh>().color = lostVolume.color;
+			volumeNumber.GetComponent<TextMesh>().color = lostVolume.color;
+			volumeCylinder.GetComponent<Renderer>().material = lostVolume;
+			break;
+		}
+	}
 	
 	[RPC]
 	
