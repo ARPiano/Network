@@ -87,6 +87,8 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
 			GameObject bgobj=GameObject.Find("piano");
 			bgobj.SendMessage("OnDetected");
 		}
+
+
     }
 
 
