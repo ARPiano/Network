@@ -72,7 +72,7 @@ public class ServerMain : MonoBehaviour {
 		angle.Trim();
 		volumeNumber.GetComponent<TextMesh>().text  = volume;
 		Vector3 langle = volumeCylinder.transform.localEulerAngles;
-		langle.y = float.Parse(angle);
+		langle.y = float.Parse(angle.Substring(0,4));
 		volumeCylinder.transform.localEulerAngles = langle; 
 	}
 
